@@ -1,4 +1,4 @@
-#Docker-102 Project - Exploring docker-compose
+# Docker-102 Project - Exploring docker-compose
 
 ## Docker-Development Environment
 
