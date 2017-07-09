@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker rm $(docker ps -qf status=exited 2>/dev/null) 2>/dev/null
+docker rmi $(docker images -qf dangling=true 2>/dev/null) 2>/dev/null
+docker volume rm $(docker volume ls -qf dangling=true 2>/dev/null) 2>/dev/null
+echo done.

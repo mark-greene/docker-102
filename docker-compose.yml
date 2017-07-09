@@ -1,0 +1,73 @@
+version: '2'
+services:
+
+  database:
+    restart: always
+    image: postgres
+    environment:
+      - POSTGRES_USER=gogs
+      - POSTGRES_PASSWORD=gogs
+    volumes:
+        # - ./data:/var/lib/postgresql/data
+        - database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  gogs:
+    restart: always
+    image: gogs/gogs
+    volumes:
+      # - ./gogs:/data
+      - gogs:/data
+    ports:
+      - "22:22"
+      - "3000:3000"
+    depends_on:
+      - database
+
+  registry:
+    restart: always
+    image: registry:2
+    # environment:
+      # REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /registry
+      # REGISTRY_STORAGE_DELETE_ENABLED: 'true'
+      # REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+      # REGISTRY_HTTP_SECRET: "rwF4PWKlFNv65pvPwyZPS"
+      # REGISTRY_HTTP_TLS_CERTIFICATE: /certs/domain.crt
+      # REGISTRY_HTTP_TLS_KEY: /certs/domain.key
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./conf/registry:/etc/docker/registry:ro   # use config.yml and not environment
+      - ./certs:/certs:ro
+      - registry:/registry
+    networks:
+      - registry
+
+  registry-ui:
+    restart: always
+    image: hyper/docker-registry-web
+    # environment:
+      # - REGISTRY_URL=https://registry:5000/v2
+      # - REGISTRY_NAME=mark-dev:5000
+      # - REGISTRY_TRUST_ANY_SSL=true
+      # - REGISTRY_BASIC_AUTH="rwF4PWKlFNv65pvPwyZPS"
+      # - REGISTRY_READONLY=false
+    ports:
+      - 8080:8080
+    volumes:
+      - ./conf/ui:/conf:ro  # use config.yml and not environment
+      - ./certs:/certs:ro
+      - registry:/data
+    networks:
+      - registry
+    depends_on:
+      - registry
+
+networks:
+  registry:
+
+volumes:
+  database:
+  gogs:
+  registry:
