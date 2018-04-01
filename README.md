@@ -35,7 +35,7 @@ Use openssl to generate the certs.
 openssl req -newkey rsa:4096 -nodes -sha256 -subj "/CN=localhost" -keyout certs/domain.key -x509 -days 365 -out certs/domain.crt
 cp certs/domain.crt /etc/docker/certs.d/localhost:5000/ca.crt
 ```
-Replace localhost with your domain (or host) name that you used when creating the certs
+Replace localhost with your domain (or host) name that you used when creating the certs and pdate the registry and ui config files with your domain (or host) name.
 
 ## References
 * https://github.com/gogits/gogs
