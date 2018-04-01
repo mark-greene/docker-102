@@ -12,11 +12,11 @@ http:
 auth:
   token:
     # external url to docker-web authentication endpoint
-    realm: http://localhost:8080/api/auth
+    realm: http://mark:3001/api/auth
     # should be same as registry.name of registry-web
-    service: mark-dev:5000
+    service: mark:5000
     # should be same as registry.auth.issuer of registry-web
-    issuer: mark-dev
+    issuer: mark
     # path to auth certificate
     rootcertbundle: /certs/domain.crt
 

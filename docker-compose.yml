@@ -54,7 +54,7 @@ services:
       # - REGISTRY_BASIC_AUTH="rwF4PWKlFNv65pvPwyZPS"
       # - REGISTRY_READONLY=false
     ports:
-      - 8080:8080
+      - 3001:8080
     volumes:
       - ./conf/ui:/conf:ro  # use config.yml and not environment
       - ./certs:/certs:ro

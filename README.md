@@ -28,7 +28,7 @@ http://localhost:3001
 The first time you will need to Sign In with admin/admin.  You can then set the admin password and create users.
 
 ### Self-signed certs
-The certs are examples for my local development machine `mark-dev`. You will need to replace them with your own certs.
+The certs are examples for my local development machine `mark`. You will need to replace them with your own certs.
 
 Use openssl to generate the certs.
 ```
